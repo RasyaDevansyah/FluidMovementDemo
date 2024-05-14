@@ -61,8 +61,12 @@ shape = SubResource("CapsuleShape3D_8jaaj")
 [node name="crouching_collision" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.400598, 0)
 shape = SubResource("CapsuleShape3D_ayd0k")
+disabled = true
 
 [node name="Head" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.582001, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, 1.375, 0)
