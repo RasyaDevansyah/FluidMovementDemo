@@ -3,10 +3,12 @@ extends CharacterBody3D
 #player nodes
 @export var head : Node
 @onready var neck : Node = $Neck
+@onready var eyes : Node= $Neck/Head/Eyes
+
 @onready var standing_collision : CollisionShape3D = $standing_collision
 @onready var crouching_collision : CollisionShape3D = $crouching_collision
 @onready var ray_cast_3d : RayCast3D = $RayCast3D
-@onready var camera_3d : Camera3D = $Neck/Head/Camera3D
+@onready var camera_3d : Camera3D = $Neck/Head/Eyes/Camera3D
 
 #speed variables
 @export var current_speed : float = 5.0
@@ -26,6 +28,20 @@ var slide_timer = 0.0
 var slide_timer_max = 1.0
 var slide_vector = Vector2.ZERO
 var slide_speed = 10.0
+
+#head bobbings vars
+const head_bobbing_sprinting_speed : float = 22.0
+const head_bobbing_walking_speed : float = 14.0
+const head_bobbing_crouching_speed : float = 10.0
+
+const head_bobbing_sprinting_intensity : float = 0.09
+const head_bobbing_walking_intensity : float = 0.06
+const head_bobbing_crouching_intensity : float = 0.07
+
+var head_bobbing_current_intencity = 0.0
+var head_bobbing_vector = Vector2.ZERO
+var head_bobbing_index = 0.0
+
 #movement vars
 @export var jump_velocity : float = 4.5
 var def_head_pos_y : float
@@ -120,6 +136,28 @@ func _physics_process(delta):
 			free_looking = false
 			print("slide end")
 	
+	#handle headbob
+	if sprinting:
+		head_bobbing_current_intencity = head_bobbing_sprinting_intensity
+		head_bobbing_index += head_bobbing_sprinting_speed * delta
+	elif walking:
+		head_bobbing_current_intencity = head_bobbing_walking_intensity
+		head_bobbing_index += head_bobbing_walking_speed * delta
+	elif crouching:
+		head_bobbing_current_intencity = head_bobbing_crouching_intensity
+		head_bobbing_index += head_bobbing_crouching_speed * delta
+	
+	if is_on_floor() and !sliding and input_dir != Vector2.ZERO:
+		head_bobbing_vector.y = sin(head_bobbing_index)
+		head_bobbing_vector.x = sin(head_bobbing_index/2) + 0.5
+		
+		eyes.position.y = lerp(eyes.position.y, head_bobbing_vector.y * (head_bobbing_current_intencity/2.0), delta * lerp_speed)
+		eyes.position.x = lerp(eyes.position.x, head_bobbing_vector.x * head_bobbing_current_intencity, delta * lerp_speed)
+	else:
+		eyes.position.y = lerp(eyes.position.y, 0.0, delta * lerp_speed)		
+		eyes.position.x = lerp(eyes.position.x, 0.0, delta * lerp_speed)
+		
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
