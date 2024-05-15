@@ -1,11 +1,63 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcarws1axrfsc"]
+[gd_scene load_steps=28 format=3 uid="uid://dcarws1axrfsc"]
 
-[ext_resource type="Texture2D" uid="uid://cqot7fc8jjts0" path="res://assets/textures/dev/grids/Dark/texture_07.png" id="1_gtjt4"]
+[ext_resource type="Texture2D" uid="uid://b4pbb0qv23p2l" path="res://assets/Slimedev Logo (1).png" id="1_872jd"]
+[ext_resource type="Texture2D" uid="uid://8bnltx045gvw" path="res://assets/godot-prototype-texture/Vector/checker_black_512x512.svg" id="1_qqvd6"]
+[ext_resource type="Texture2D" uid="uid://dewfr4ttikvpy" path="res://assets/godot-prototype-texture/Vector/grid_blue_512x512.svg" id="2_2cjfr"]
 [ext_resource type="Texture2D" uid="uid://baakb18stpi4j" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_ue31s"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="3_i5esx"]
+[ext_resource type="Texture2D" uid="uid://hm7qo57vkstp" path="res://assets/godot-prototype-texture/Vector/grid_yellow_512x512.svg" id="3_vxdt1"]
+[ext_resource type="Texture2D" uid="uid://bki548gfhlsnr" path="res://assets/godot-prototype-texture/Vector/grid_orange_512x512.svg" id="4_uyur3"]
+[ext_resource type="Texture2D" uid="uid://bbhxnxus4efcb" path="res://assets/godot-prototype-texture/Vector/grid_red_512x512.svg" id="5_u7lk3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltevu"]
-albedo_texture = ExtResource("1_gtjt4")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8i8u2"]
+load_path = "res://.godot/imported/grid_black_512x512.svg-6af11a71aa2f379149004d1f6af64f85.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbpoj"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = SubResource("CompressedTexture2D_8i8u2")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wniy2"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("1_qqvd6")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhs8s"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("1_872jd")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7733f"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("1_872jd")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqnsw"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("2_2cjfr")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_telsc"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("3_vxdt1")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc3x3"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("4_uyur3")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6qe5"]
+shading_mode = 0
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+albedo_texture = ExtResource("5_u7lk3")
 uv1_triplanar = true
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r2rbc"]
@@ -25,21 +77,236 @@ glow_enabled = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ayd0k"]
 height = 1.2
 
+[sub_resource type="Animation" id="Animation_stbhg"]
+resource_name = "Jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0349066, 0, 0.0174533), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qnp5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nqqu2"]
+resource_name = "landing"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0349066, 0, 0.0174533), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_thn8i"]
+resource_name = "roll"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, 0.0174533), Vector3(-6.28319, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svi7m"]
+_data = {
+"Jump": SubResource("Animation_stbhg"),
+"RESET": SubResource("Animation_qnp5a"),
+"landing": SubResource("Animation_nqqu2"),
+"roll": SubResource("Animation_thn8i")
+}
+
 [node name="World" type="Node3D"]
 
 [node name="stage" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.33847, 1)
 use_collision = true
 size = Vector3(20, 1, 20)
-material = SubResource("StandardMaterial3D_ltevu")
+material = SubResource("StandardMaterial3D_bbpoj")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71506, 16.0327)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.8759, 0.298892, 0)
 use_collision = true
 size = Vector3(20, 1, 20)
-material = SubResource("StandardMaterial3D_ltevu")
+material = SubResource("StandardMaterial3D_bbpoj")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.8759, -11.3084, 0)
+use_collision = true
+size = Vector3(19, 22.1631, 19)
+material = SubResource("StandardMaterial3D_wniy2")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753038, -12.9071, 0.843399)
+use_collision = true
+size = Vector3(19, 22.1631, 19)
+material = SubResource("StandardMaterial3D_wniy2")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.332668, -14.8797, 22.3893)
+use_collision = true
+size = Vector3(19, 22.1631, 19)
+material = SubResource("StandardMaterial3D_wniy2")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7043, -14.8797, 22.3893)
+use_collision = true
+size = Vector3(19, 22.1631, 19)
+material = SubResource("StandardMaterial3D_wniy2")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3408, -3.18012, 22.3732)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_bbpoj")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133415, -3.18012, 22.3732)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_bbpoj")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99421, 0.127633, 6.01009)
+use_collision = true
+size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_fhs8s")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3391, -1.647, 13.4066)
+use_collision = true
+size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_7733f")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00538, -0.00042367, 3.51187)
+use_collision = true
+size = Vector3(4, 1.58203, 5)
+material = SubResource("StandardMaterial3D_dqnsw")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.699423, -0.300778, -2.06329)
+use_collision = true
+size = Vector3(4, 0.981323, 5)
+material = SubResource("StandardMaterial3D_telsc")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.33835, 0.00656486, -2.06329)
+use_collision = true
+size = Vector3(7.41846, 1.59601, 5)
+material = SubResource("StandardMaterial3D_telsc")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.629, 1.29568, -2.06329)
+use_collision = true
+size = Vector3(7.41846, 1.01436, 5)
+material = SubResource("StandardMaterial3D_bc3x3")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.629, 1.82851, 7.37511)
+use_collision = true
+size = Vector3(7.41846, 2.08003, 5)
+material = SubResource("StandardMaterial3D_bc3x3")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50538, 0.82344, 5.51187)
+use_collision = true
+size = Vector3(3, 0.89502, 1)
+material = SubResource("StandardMaterial3D_dqnsw")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 0.99999, 0.00455529, 0, -0.00455529, 0.99999, -0.510569, 0.233194, 5.51169)
+use_collision = true
+size = Vector3(1, 2.08057, 1)
+material = SubResource("StandardMaterial3D_dqnsw")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12667, -2.20696, 13.4021)
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_g6qe5")
 
 [node name="environment" type="Node3D" parent="."]
 
@@ -51,7 +318,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("head")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00007, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.53224, 24.1003)
 script = ExtResource("3_i5esx")
 head = NodePath("Neck/Head")
 
@@ -74,3 +341,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.582001, 0)
 [node name="Eyes" type="Node3D" parent="Player/Neck/Head"]
 
 [node name="Camera3D" type="Camera3D" parent="Player/Neck/Head/Eyes"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Neck/Head/Eyes"]
+libraries = {
+"": SubResource("AnimationLibrary_svi7m")
+}

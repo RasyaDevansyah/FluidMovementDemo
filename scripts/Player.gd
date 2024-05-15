@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var crouching_collision : CollisionShape3D = $crouching_collision
 @onready var ray_cast_3d : RayCast3D = $RayCast3D
 @onready var camera_3d : Camera3D = $Neck/Head/Eyes/Camera3D
+@onready var animation_player : AnimationPlayer = $Neck/Head/Eyes/AnimationPlayer
 
 #speed variables
 @export var current_speed : float = 5.0
@@ -50,6 +51,7 @@ var lerp_speed : float = 10.0
 var air_lerp_speed : float = 3.0
 var free_look_tilt_amount : float = 8
 
+var last_velocity = Vector2.ZERO
 #input variables
 var direction : Vector3
 @export var mouse_sens : float = 0.25
@@ -119,13 +121,13 @@ func _physics_process(delta):
 	if Input.is_action_pressed("free_look") or sliding:
 		free_looking = true
 		if sliding:
-			camera_3d.rotation.z = lerp(camera_3d.rotation.z, -deg_to_rad(7.0), delta * lerp_speed)
+			eyes.rotation.z = lerp(eyes.rotation.z, -deg_to_rad(7.0), delta * lerp_speed)
 		else:
-			camera_3d.rotation.z = -deg_to_rad(neck.rotation.y * free_look_tilt_amount)
+			eyes.rotation.z = -deg_to_rad(neck.rotation.y * free_look_tilt_amount)
 	else:
 		free_looking = false
 		neck.rotation.y = lerp(neck.rotation.y, 0.0, delta * lerp_speed)
-		camera_3d.rotation.z = lerp(camera_3d.rotation.z, 0.0, delta * lerp_speed)
+		eyes.rotation.z = lerp(eyes.rotation.z, 0.0, delta * lerp_speed)
 	
 	#handle sliding
 	
@@ -166,7 +168,19 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
 		sliding = false
+		animation_player.play("Jump")
 		
+	#handle landing
+	if is_on_floor():
+		if last_velocity.y < -10.0:
+			animation_player.play("roll")
+			print(last_velocity.y)
+		elif last_velocity.y < -4.0:
+			animation_player.play("landing")
+			print(last_velocity.y)
+			
+			
+
 	if is_on_floor():
 		direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_speed)
 	else:
@@ -184,4 +198,5 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
+	last_velocity = velocity
 	move_and_slide()
